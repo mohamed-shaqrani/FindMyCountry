@@ -77,6 +77,7 @@ dotnet run
 
 ### 2. Unblock a Country
 - **Endpoint**: `DELETE /api/countries/block/{countryCode}`
+- **Description**: Removes a country from the blocked list
 - **Example**: `DELETE /api/countries/block/US`
 
 ### 3. Get All Blocked Countries
