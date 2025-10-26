@@ -1,9 +1,10 @@
 ﻿using Main.Common.Base;
+using Main.Common.Response;
 using Main.Common.Response.Endpint;
 using Main.Feature.IpGeoLocation.Endpoints.VM;
 using Main.Helpers;
 using Microsoft.AspNetCore.Mvc;
-namespace Main.Feature.IpGeoLocation.Endpoints;
+namespace Main.Feature.IpGeoLocation.Endpoints.Countries;
 [Route("api/countries/block/")]
 
 public sealed class BlockCountryEndpoint : BaseEndpoint<BlockCountryViewModel, EndpointResponse<bool>>
@@ -29,7 +30,7 @@ public sealed class BlockCountryEndpoint : BaseEndpoint<BlockCountryViewModel, E
                                                                         BlockedAt = DateTime.UtcNow,
                                                                     });
         return !res
-                ? BadRequest(EndpointResponse<bool>.Failure(Common.Response.ErrorCode.ValidationError, "Country is already blocked."))
+                ? BadRequest(EndpointResponse<bool>.Failure(ErrorCode.ValidationError, "Country is already blocked."))
                 : Ok(EndpointResponse<bool>.Success(true, "Country blocked successfully."));
     }
 }

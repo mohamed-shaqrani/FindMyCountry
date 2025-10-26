@@ -4,7 +4,7 @@ using Main.Extensions;
 using Main.Feature.IpGeoLocation.Endpoints.VM;
 using Main.Helpers;
 using Microsoft.AspNetCore.Mvc;
-namespace Main.Feature.IpGeoLocation.Endpoints;
+namespace Main.Feature.IpGeoLocation.Endpoints.Countries;
 [Route("api/countries/")]
 
 public sealed class AllBlockedCountriesEndpoint : BaseEndpoint<CountryParam, EndpointResponse<bool>>

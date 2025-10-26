@@ -1,9 +1,8 @@
 ﻿using Main.Common.Base;
 using Main.Common.Response.Endpint;
 using Main.Feature.IpGeoLocation.Endpoints.VM;
-using Main.Helpers;
 using Microsoft.AspNetCore.Mvc;
-namespace Main.Feature.IpGeoLocation.Endpoints;
+namespace Main.Feature.IpGeoLocation.Endpoints.Countries;
 
 [Route("api/countries/block/")]
 public sealed class UnBlockCountryEndpoint : BaseEndpoint<BlockCountryViewModel, EndpointResponse<bool>>

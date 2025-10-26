@@ -6,7 +6,7 @@ using MediatR;
 using Microsoft.Extensions.Options;
 namespace Main.Feature.IpGeoLocation.Queries;
 
-internal sealed record IpGeolocationQuery(string IpAddress) : IRequest<RequestResult<IpGeolocationResponse>>;
+internal sealed record IpGeolocationQuery(string? IpAddress) : IRequest<RequestResult<IpGeolocationResponse>>;
 internal sealed class IpGeolocationHandler : BaseRequestHandler<IpGeolocationQuery, RequestResult<IpGeolocationResponse>>
 {
     private readonly HttpClient _httpClient;
@@ -18,9 +18,8 @@ internal sealed class IpGeolocationHandler : BaseRequestHandler<IpGeolocationQue
     }
     public override async Task<RequestResult<IpGeolocationResponse>> Handle(IpGeolocationQuery request, CancellationToken cancellationToken)
     {
-        var url = $"{_options.BaseUrl}?apiKey={_options.ApiKey}&ip={request.IpAddress}";
-
-        var res = await _httpClient.GetFromJsonAsync<IpGeolocationResponse>(url, cancellationToken);
+        var url = $"{_options.BaseUrl}?apiKey={_options.ApiKey}&ip={request?.IpAddress}";
+        var res = await _httpClient.GetFromJsonAsync<IpGeolocationResponse>(url);
         return RequestResult<IpGeolocationResponse>.Success(res, "success");
     }
 

@@ -1,8 +1,9 @@
 ﻿using Autofac;
 using FluentValidation;
 using Main.Common.Base;
+using Main.Feature.IpGeoLocation.Endpoints.Countries;
+using Main.Feature.IpGeoLocation.Endpoints.Logs;
 using Main.Feature.IpGeoLocation.Queries;
-using Main.Helpers;
 
 namespace Main.Common.Config;
 internal sealed class AutofacModule : Module
@@ -14,6 +15,7 @@ internal sealed class AutofacModule : Module
         builder.RegisterGeneric(typeof(BaseEndpointParam<>))
                 .AsSelf()
                 .InstancePerLifetimeScope();
+        builder.RegisterAssemblyTypes(typeof(IpGeolocationHandler).Assembly);
 
         builder.RegisterAssemblyTypes(ThisAssembly)
                 .AsClosedTypesOf(typeof(IValidator<>))
@@ -24,7 +26,9 @@ internal sealed class AutofacModule : Module
         builder.RegisterType<BlockedCountryIPTracker>()
                 .As<ICountryIPTracker>()
                 .SingleInstance();
-        builder.RegisterAssemblyTypes(typeof(IpGeolocationHandler).Assembly);
+        builder.RegisterType<BlockedAttemptMemoryStore>()
+             .As<IBlockedAttemptStore>()
+             .SingleInstance();
 
     }
 }

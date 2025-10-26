@@ -7,7 +7,7 @@ public enum ErrorCode
 
     DataBaseError = 02,
     ItemAlreadyExists = 03,
+    Conflict = 409,
+
     InternalServerError = 500,
-
-
 }
