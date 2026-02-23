@@ -18,8 +18,6 @@ public sealed class GetAllUsersEndpoint : BaseEndpoint<BlockCountryViewModel, En
     {
         var query = new GetUsersQuery(null);
         var result = await _mediator.Send(query);
-
-
         return Ok(EndpointResponse<bool>.Success(true, "Country is blocked.Country is not blocked."));
     }
 }

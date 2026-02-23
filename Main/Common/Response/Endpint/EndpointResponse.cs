@@ -1,6 +1,4 @@
-﻿using Main.Common.Response;
-
-namespace Main.Common.Response.Endpint;
+﻿namespace Main.Common.Response.Endpint;
 
 public record EndpointResponse<T>(T Data, bool IsSuccess, string Message, ErrorCode ErrorCode)
 {

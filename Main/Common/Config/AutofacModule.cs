@@ -2,6 +2,7 @@
 using FluentValidation;
 using Main.Common.Base;
 using Main.Common.Repository;
+using Main.Feature.IpGeoLocation.Endpoints.Countries;
 using Main.Feature.IpGeoLocation.Queries;
 using Main.Repository;
 using MediatR;
@@ -15,7 +16,8 @@ internal sealed class AutofacModule : Module
         builder.RegisterType<UnitOfWork>()
             .As<IUnitOfWork>()
             .InstancePerLifetimeScope();
-
+        //register ICountryIPTracker 
+        builder.RegisterType<ICountryIPTracker>().AsImplementedInterfaces().InstancePerLifetimeScope();
         builder.RegisterAssemblyTypes(ThisAssembly)
                 .AsClosedTypesOf(typeof(IValidator<>))
                 .InstancePerLifetimeScope();

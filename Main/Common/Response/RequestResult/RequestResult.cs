@@ -1,6 +1,4 @@
-﻿using Main.Common.Response;
-
-namespace Main.Common.Response.RequestResult;
+﻿namespace Main.Common.Response.RequestResult;
 
 public record RequestResult<T>(T Data, bool IsSuccess, string Message, ErrorCode ErrorCode)
 {
