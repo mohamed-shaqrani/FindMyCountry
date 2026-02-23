@@ -1,7 +1,7 @@
 ﻿using Main.Common.Base;
+using Main.Common.Pagination;
 using Main.Common.Response.Endpint;
 using Main.Extensions;
-using Main.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Main.Feature.IpGeoLocation.Endpoints.Logs;

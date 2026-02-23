@@ -1,5 +1,6 @@
 ﻿using Hangfire;
 using Main.Common.Base;
+using Main.Common.Pagination;
 using Main.Common.Response;
 using Main.Common.Response.Endpint;
 using Main.Feature.IpGeoLocation.Endpoints.VM;

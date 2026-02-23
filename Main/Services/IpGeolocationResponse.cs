@@ -7,6 +7,4 @@ public class IpGeolocationResponse
     public string country_code2 { get; set; } = string.Empty;
     public string country_code3 { get; set; } = string.Empty;
     public string isp { get; set; } = string.Empty;
-
-
 }

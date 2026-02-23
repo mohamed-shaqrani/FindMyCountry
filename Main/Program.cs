@@ -3,15 +3,15 @@ using Autofac.Extensions.DependencyInjection;
 using Hangfire;
 using Hangfire.MemoryStorage;
 using Main.Common.Config;
+using Main.Data;
 using Main.Extensions;
 using Main.Helpers;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -20,17 +20,16 @@ builder.Services.AddCompressionServices();
 builder.Services.Configure<IpGeolocationOptions>(
     builder.Configuration.GetSection("IpGeolocation"));
 builder.Services.AddHttpClient();
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddHangfire((sp, config) =>
 {
     config.UseAutofacActivator(sp.GetAutofacRoot());
-
     config.UseMemoryStorage();
 
 });
+
 builder.Services.AddHangfireServer();
-
-
 builder.Services.AddMediatR(AssemblyReference.Assembly);
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(container =>
@@ -38,6 +37,8 @@ builder.Host.ConfigureContainer<ContainerBuilder>(container =>
     container.RegisterModule(new AutofacModule());
 });
 builder.Services.AddMemoryCache();
+builder.Services.AddIdentityServices(builder.Configuration);
+builder.Services.Configure<JWT>(builder.Configuration.GetSection("JWT"));
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });

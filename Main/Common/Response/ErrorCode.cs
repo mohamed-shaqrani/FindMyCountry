@@ -10,4 +10,5 @@ public enum ErrorCode
     Conflict = 409,
 
     InternalServerError = 500,
+    NotFound = 501,
 }
